@@ -1,8 +1,0 @@
-- hosts: all
-  tasks:
-    - name: Configure Dock
-      import_tasks: task.yaml
-
-  handlers:
-    - name: killall Dock
-      command: killall Dock
