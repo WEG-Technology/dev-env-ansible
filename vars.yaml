@@ -1,0 +1,90 @@
+dock_items:
+  - name: Launchpad.app
+    selected: true
+  - name: Google Chrome.app
+    selected: false
+  - name: Phpstorm.app
+    selected: false
+  - name: GoLand.app
+    selected: false
+  - name: iTerm.app
+    selected: true
+  - name: Spotify.app
+    selected: false
+  - name: Notion.app
+    selected: true
+  - name: Skype.app
+    selected: true
+  - name: Mattermost.app
+    selected: true
+homebrew_taps:
+  - name: homebrew/cask-fonts
+    selected: true
+  - name: homebrew/cask-versions
+    selected: true
+homebrew_packages:
+  - name: autoconf
+    selected: true
+  - name: bash-git-prompt
+    selected: true
+  - name: curl
+    selected: true
+  - name: helm
+    selected: false
+  - name: htop
+    selected: true
+  - name: istioctl
+    selected: false
+  - name: kubernetes-cli
+    selected: false
+  - name: tmux
+    selected: false
+  - name: tree
+    selected: false
+  - name: vim
+    selected: false
+  - name: zsh
+    selected: true
+homebrew_cask_packages:
+  - name: brave-browser
+    selected: true
+  - name: firefox
+    selected: false
+  - name: goland
+    selected: false
+  - name: google-chrome
+    selected: true
+  - name: google-cloud-sdk
+    selected: false
+  - name: insomnia
+    selected: true
+  - name: iterm2
+    selected: true
+  - name: jetbrains-toolbox
+    selected: true
+  - name: mattermost
+    selected: true
+  - name: mongodb-compass
+    selected: false
+  - name: notion
+    selected: true
+  - name: orbstack
+    selected: true
+  - name: phpstorm
+    selected: false
+  - name: postman
+    selected: false
+  - name: skype
+    selected: true
+  - name: spotify
+    selected: false
+  - name: sublime-text
+    selected: false
+  - name: switchhosts
+    selected: true
+  - name: visual-studio-code
+    selected: false
+  - name: webstorm
+    selected: false
+  - name: whatsapp
+    selected: false

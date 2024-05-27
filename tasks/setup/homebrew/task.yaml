@@ -1,0 +1,63 @@
+- name: Read Projects From Yaml
+  include_vars:
+    file: ./../../../vars.yaml
+
+- name: Ensure Homebrew taps are present
+  block:
+    - name: Gather list of existing taps
+      command: brew tap
+      register: existing_taps
+      changed_when: false
+
+    - name: Filter selected Homebrew taps
+      set_fact:
+        selected_taps: "{{ homebrew_taps | selectattr('selected', 'equalto', true) | map(attribute='name') | list }}"
+
+    - name: Install missing Homebrew taps
+      homebrew_tap:
+        name: "{{ item }}"
+        state: present
+      loop: "{{ selected_taps }}"
+      when: item not in existing_taps.stdout_lines
+      loop_control:
+        label: "{{ item }}"
+
+- name: Ensure Homebrew formula packages are installed
+  block:
+    - name: Gather list of installed formulae
+      command: brew list --formula
+      register: installed_formulae
+      changed_when: false
+
+    - name: Filter selected Homebrew packages
+      set_fact:
+        selected_packages: "{{ homebrew_packages | selectattr('selected', 'equalto', true) | map(attribute='name') | list }}"
+
+    - name: Install missing formula packages
+      homebrew:
+        name: "{{ item }}"
+        state: present
+      loop: "{{ selected_packages }}"
+      when: item not in installed_formulae.stdout_lines
+      loop_control:
+        label: "{{ item }}"
+
+- name: Ensure Homebrew cask packages are installed
+  block:
+    - name: Gather list of installed casks
+      command: brew list --cask
+      register: installed_casks
+      changed_when: false
+
+    - name: Filter selected Homebrew cask packages
+      set_fact:
+        selected_casks: "{{ homebrew_cask_packages | selectattr('selected', 'equalto', true) | map(attribute='name') | list }}"
+
+    - name: Install missing cask packages
+      homebrew_cask:
+        name: "{{ item }}"
+        state: present
+      loop: "{{ selected_casks }}"
+      when: item not in installed_casks.stdout_lines
+      loop_control:
+        label: "{{ item }}"

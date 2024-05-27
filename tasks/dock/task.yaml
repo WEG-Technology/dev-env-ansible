@@ -1,0 +1,20 @@
+- name: Read Projects From Yaml
+  include_vars:
+    file: ./../../vars.yaml
+
+- name: Get list of .app files in /Applications
+  shell: find . -name '*.app' -maxdepth 2 | sed 's/^\.\///'
+  args:
+    chdir: /Applications
+  register: installed_apps
+  changed_when: false
+
+- name: Wipe all default app icons from the Dock
+  command: defaults write com.apple.dock persistent-apps -array
+  notify: killall Dock
+
+- name: Add applications to Dock
+  command: defaults write com.apple.dock persistent-apps -array-add '<dict><key>tile-data</key><dict><key>file-data</key><dict><key>_CFURLString</key><string>/Applications/{{ item.name }}</string><key>_CFURLStringType</key><integer>0</integer></dict></dict></dict>'
+  with_items: "{{ dock_items }}"
+  when: item.selected | bool
+  notify: killall Dock
