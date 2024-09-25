@@ -2,21 +2,21 @@
   include_vars:
     file: ./../../../vars.yaml
 
-- name: Ensure Homebrew taps are present
-  block:
-    - name: Gather list of existing taps
-      command: brew tap
-      register: existing_taps
-      changed_when: false
-
-    - name: Install missing Homebrew taps
-      homebrew_tap:
-        name: "{{ item }}"
-        state: present
-      loop: "{{ homebrew_taps }}"
-      when: item not in existing_taps.stdout_lines
-      loop_control:
-        label: "{{ item }}"
+#- name: Ensure Homebrew taps are present
+#  block:
+#    - name: Gather list of existing taps
+#      command: brew tap
+#      register: existing_taps
+#      changed_when: false
+#
+#    - name: Install missing Homebrew taps
+#      homebrew_tap:
+#        name: "{{ item }}"
+#        state: present
+#      loop: "{{ homebrew_taps }}"
+#      when: item not in existing_taps.stdout_lines
+#      loop_control:
+#        label: "{{ item }}"
 
 - name: Ensure Homebrew formula packages are installed
   block:
